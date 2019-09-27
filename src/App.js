@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Login from './containers/Login'
+import { Route } from 'react-router-dom'
+import Dashboard from './components/Dashboard';
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import AddResident from './containers/AddResident';
+import AddGaurd from './containers/AddGaurd'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  drawerList = {
+    'Add Resident': ['add-resident', <DashboardIcon />],
+    'Add Gaurd': ['add-gaurd', <DashboardIcon />],
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Route exact path='/login' component={Login} />
+        <Route path='/login/dashboard' component={() =>
+          <Dashboard drawerList={this.drawerList}>
+            <Route exact path='/login/dashboard/add-resident' component={AddResident} />
+            <Route exact path='/login/dashboard/add-gaurd' component={AddGaurd} />
+          </Dashboard>
+        }
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
