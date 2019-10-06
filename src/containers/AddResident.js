@@ -60,11 +60,11 @@ class AddUser extends Component {
 
     submitHandler = () => {
         console.log(this.state);
-        this.setState({
+        let state2 = {
             ...this.state,
             floor: parseInt(this.state.floor),
             flat: parseInt(this.state.flat),
-        })
+        }
         let id = 'r'+this.state.building + this.state.floor + this.state.flat;
         console.log(id);
         let family = {};
@@ -78,8 +78,8 @@ class AddUser extends Component {
                 else {
                     id = id + (Object.keys(family).length+1).toString();
                 }
-                axios.patch('/residents/'+id+'/'+'.json',this.state)
-                axios.patch('/structure/' + this.state.building + '/' + parseInt(this.state.floor) + '/' + parseInt(this.state.flat) + '.json',{[id]:this.state.password})
+                axios.patch('/residents/'+id+'/'+'.json',state2);
+                axios.patch('/structure/' + this.state.building + '/' + (this.state.floor) + '/' + (this.state.flat) + '.json',{[id]:this.state.password})
                     .then((response) => {
                         console.log(response.data)
                     })

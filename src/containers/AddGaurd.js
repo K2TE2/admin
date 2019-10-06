@@ -39,7 +39,7 @@ const useStyles = (theme => ({
     },
 }));
 
-class AddGaurd extends Component {
+class AddGuard extends Component {
 
     state = {
         name: '',
@@ -66,19 +66,19 @@ class AddGaurd extends Component {
         let id = 'g' + this.state.gateNo;
         console.log(id);
 
-        axios.get('/gaurds.json')
+        axios.get('/guards.json')
             .then((response) => {
                 console.log(response.data);
-                let gaurds = response.data;
-                if (gaurds === null) {
+                let guards = response.data;
+                if (guards === null) {
                     id = id + '1';
                 }
                 else {
-                    id = id + (Object.keys(gaurds).length + 1).toString();
+                    id = id + (Object.keys(guards).length + 1).toString();
                 }
                 console.log(id);
 
-                axios.patch('/gaurds/' + id + '.json', this.state)
+                axios.patch('/guards/' + id + '.json', this.state)
                     .then((response) => {
                         console.log(response);
                     })
@@ -99,7 +99,7 @@ class AddGaurd extends Component {
                 <Paper className={classes.paper}>
                     <br></br>
                     <Typography component="h2" variant="h4" align="center">
-                        Add Gaurd
+                        Add guard
                     </Typography>
                     <br></br>
                     <form className={classes.container} noValidate autoComplete="off">
@@ -161,4 +161,4 @@ class AddGaurd extends Component {
 }
 
 
-export default withStyles(useStyles)(AddGaurd);
+export default withStyles(useStyles)(AddGuard);
